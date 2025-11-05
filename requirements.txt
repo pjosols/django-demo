@@ -1,4 +1,4 @@
-Django==5.0.3
+Django==5.1.14
 Faker==24.3.0
 mongo-datatables==1.1.1
 pymongo==4.11.2
