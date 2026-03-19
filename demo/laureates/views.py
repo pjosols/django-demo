@@ -21,10 +21,14 @@ DATA_FIELDS = [
 ]
 
 
+_client = None
+
+
 def _get_db():
-    client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
-    client.db = client['geonames_demo']
-    return client
+    global _client
+    if _client is None:
+        _client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
+    return _client['geonames_demo']
 
 
 class IndexView(View):
