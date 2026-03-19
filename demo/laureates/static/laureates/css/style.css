@@ -1,0 +1,63 @@
+:root {
+    --accent: #40e0ff;
+    --accent-dim: rgba(64, 224, 255, 0.12);
+    --surface: #151a21;
+    --border: #273140;
+}
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #0b0d10;
+}
+
+/* Header */
+.site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+.site-header h1 { font-weight: 600; letter-spacing: 0.02em; }
+
+/* Card */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+/* Table */
+.table { --bs-table-bg: transparent; --bs-table-striped-bg: rgba(255,255,255,0.02); }
+.table th, .table td { padding: 0.75rem 1rem; }
+.table thead th {
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    border-bottom-color: var(--border);
+}
+.table td { font-size: 0.8rem; color: #e9eef5; }
+
+/* Pagination */
+.page-item.active .page-link {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0b0d10;
+    font-weight: 600;
+}
+.page-link { color: rgba(255,255,255,0.5); }
+.page-link:hover { color: var(--accent); background: var(--accent-dim); }
+
+/* Search input */
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.2rem var(--accent-dim);
+}
+
+/* DataTables processing indicator */
+.dt-container .dt-processing > * { color: var(--accent) !important; border-color: var(--accent) !important; }
+.dt-processing > div:last-child > div { background: var(--accent) !important; }
+
+/* DataTables info text */
+.dt-container .dt-info { font-size: 1rem; opacity: 0.5; }
+
+/* Footer */
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { color: #7aeeff; }

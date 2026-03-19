@@ -1,175 +1,106 @@
-# MongoDB DataTables Django Demo
+# mongo-datatables Django Demo
 
-A comprehensive demonstration application showcasing the integration of MongoDB with jQuery DataTables for efficient server-side processing, built using Django 5.0.3.
+A minimal Django app demonstrating server-side DataTables powered by
+[mongo-datatables](https://github.com/pjosols/mongo-datatables).
 
-## About This Project
+## Quickstart
 
-This demo application illustrates how to use the `mongo-datatables` Python package to connect MongoDB collections with DataTables, enabling powerful server-side processing for large datasets with minimal configuration.
-
-The demo presents a fictional "Dystopian Archives" database to showcase various features including:
-
-- Server-side pagination, sorting, and filtering
-- Global search across multiple fields
-- Column-specific searches
-- Support for nested document structures
-- Type-aware search operations (dates, numbers, text, etc.)
-- Proper handling of MongoDB data types
-- Optimized text search using MongoDB text indexes
-- Advanced schema system with field type definitions
-- Class-based views with dynamic schema support
-
-## Prerequisites
-
-- Python 3.9.6+
-- MongoDB 5.0+ (running locally or accessible via network)
-- pip (Python package manager)
-
-## Installation
-
-1. Clone this repository:
-   ```
-   git clone https://github.com/MongoDataTables/django-demo.git
+1. Clone and install:
+   ```bash
+   git clone https://github.com/pjosols/django-demo.git
    cd django-demo
-   ```
-
-2. Create and activate a virtual environment:
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use: venv\Scripts\activate
-   ```
-
-3. Install required packages:
-   ```
+   python -m venv .venv
+   source .venv/bin/activate  # Windows: .venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
-4. **Important:** DataTables Editor is a commercial product and is not included in this repository.
-   - If you wish to enable the editing features, purchase a license from [DataTables Editor](https://editor.datatables.net/)
-   - Download and place the Editor files in `dystopia/books/static/books/Editor-2.4.1/`
-   - Uncomment the Editor-related lines in the HTML templates
+2. Seed the database (requires MongoDB running locally):
+   ```bash
+   python seed_data.py
+   ```
 
-## Seeding Data
+3. Run:
+   ```bash
+   cd demo
+   python manage.py runserver
+   ```
 
-To test and demonstrate the functionality of this application, you'll need sample data in your MongoDB database. The project includes a data seeding script that generates sample book records with dystopian themes.
+Open [http://localhost:8000](http://localhost:8000).
 
-### Basic Usage
+## Custom MongoDB connection
 
 ```bash
-# Generate 100 sample books (default)
-python seed_data.py --count 100
-
-# Generate a specific number of books
-python seed_data.py --count 1000
-
-# Use a custom MongoDB connection string
-python seed_data.py --connection "mongodb://username:password@hostname:port/"
+python seed_data.py --connection "mongodb://user:password@host:port/"
 ```
 
-### Data Structure
+Set `MONGO_URI` in the environment to point the app at a different instance.
 
-The seeding script creates book records with the following structure:
-
-```javascript
-{
-  "NovelId": "DYST-1A2B3C4D",       // Unique identifier
-  "Title": "The Last Horizon",       // Book title
-  "Author": "Alex Zhang",            // Author name
-  "PublisherInfo": {                 // Nested publisher information
-    "Name": "Dystopian Press",
-    "Date": ISODate("2022-03-15"),
-    "Location": "New York",
-    "Edition": 2,
-    "Details": {
-      "ISBN": "978-1234567890",
-      "Format": "Hardcover",
-      "PrintRun": 25000
-    }
-  },
-  "Pages": 324,                      // Page count
-  "Themes": [                        // Array of themes
-    "Environmental collapse", 
-    "Post-apocalyptic survival"
-  ],
-  "Rating": 4.5,                     // Book rating
-  "Description": "A haunting exploration of environmental collapse..."
-}
-```
-
-This structure demonstrates many MongoDB capabilities including nested documents and arrays, making it perfect for testing the DataTables and Editor integration.
-
-## Running the Application
-
-Start the development server:
-```
-python manage.py runserver
-```
-
-The application will be available at [http://localhost:8000](http://localhost:8000)
-
-## Using DataTables Editor
-
-This demo is configured to work with or without DataTables Editor. By default, the Editor functionality is disabled to allow users to run the demo without requiring a commercial license.
-
-To enable the Editor functionality:
-
-1. Purchase and download DataTables Editor from [https://editor.datatables.net/](https://editor.datatables.net/)
-
-2. Place the Editor files in the static directory:
-   ```
-   dystopia/books/static/books/Editor-2.4.1/
-   ```
-
-3. Uncomment the Editor CSS and JavaScript imports in `dystopia/books/templates/books/index.html`:
-   ```html
-   <!-- Uncomment these lines -->
-   <link href="{% static 'books/Editor-2.4.1/css/editor.bootstrap5.min.css' %}" rel="stylesheet">
-   <script src="{% static 'books/Editor-2.4.1/js/dataTables.editor.min.js' %}"></script>
-   <script src="{% static 'books/Editor-2.4.1/js/editor.bootstrap5.min.js' %}"></script>
-   ```
-
-4. Refresh the page, and you'll now have full CRUD capabilities with the Editor interface
-
-The application will automatically detect if the Editor scripts are loaded and enable the appropriate functionality.
-
-## Project Structure
+## Project structure
 
 ```
 django-demo/
-├── dystopia/                 # Main Django project
-│   ├── books/                # Books app
-│   │   ├── static/           # Static files (CSS, JS, etc.)
-│   │   │   └── books/        # App-specific static files
-│   │   ├── templates/        # Templates
-│   │   │   └── books/        # App-specific templates
-│   │   ├── tools/            # Utility tools for the books app
-│   │   ├── __init__.py       # Python package indicator
-│   │   ├── apps.py           # Django app configuration
-│   │   ├── models.py         # MongoDB models and schema definitions
-│   │   ├── urls.py           # URL routing for the books app
-│   │   └── views.py          # View functions and classes
-│   ├── dystopia/             # Project settings
-│   │   ├── __init__.py       # Python package indicator
-│   │   ├── settings.py       # Django settings
-│   │   ├── urls.py           # Main URL routing
-│   │   └── wsgi.py           # WSGI application entry point
-│   ├── static/               # Collected static files for production
-│   └── manage.py             # Django management script
-├── .gitignore                # Git ignore configuration
-├── seed_data.py              # Data seeding script for MongoDB
-└── requirements.txt          # Python dependencies
+├── demo/
+│   ├── laureates/
+│   │   ├── static/laureates/js/table.js   # DataTables init
+│   │   ├── templates/laureates/index.html # page template
+│   │   ├── tools/db_init.py               # index creation
+│   │   ├── apps.py                        # app config + MongoDB startup
+│   │   ├── urls.py                        # routes
+│   │   └── views.py                       # views + API endpoint
+│   ├── demo/
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   └── manage.py
+├── data/laureates.json      # Nobel Prize data (1901–present)
+├── seed_data.py             # loads data into MongoDB
+└── requirements.txt
 ```
 
-## Technologies
+## How it works
 
-- Django 5.0.3
-- mongo-datatables 1.1.1
-- jQuery DataTables 2.2.2
-- Bootstrap 5
-- MongoDB
-- DataTables Editor 2.4.1 (optional)
+`views.py` defines the data fields and passes the DataTables request to `mongo-datatables`:
 
-## mongo-datatables
+```python
+DATA_FIELDS = [
+    DataField("name",          "string"),
+    DataField("gender",        "string"),
+    DataField("birth_country", "string"),
+    DataField("year",          "number"),
+    DataField("category",      "string"),
+    DataField("motivation",    "string"),
+    DataField("share",         "number"),
+]
 
-Find mongo-datatables at [https://github.com/MongoDataTables/mongo-datatables](https://github.com/MongoDataTables/mongo-datatables).
+class LaureatesDataView(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        result = DataTables(_get_db(), "laureates", data, data_fields=DATA_FIELDS).get_rows()
+        return JsonResponse(result)
+```
 
-[![Downloads](http://pepy.tech/badge/mongo-datatables)](http://pepy.tech/project/mongo-datatables)
+`table.js` points DataTables at that endpoint:
+
+```javascript
+$('#laureates_table').DataTable({
+    serverSide: true,
+    ajax: {
+        url: '/api/laureates',
+        type: 'POST',
+        contentType: 'application/json',
+        data: function (d) { return JSON.stringify(d); }
+    },
+    columns: [
+        { data: 'year' },
+        { data: 'category' },
+        { data: 'name' },
+        // ...
+    ]
+});
+```
+
+That's the entire integration.
+
+## License
+
+MIT
