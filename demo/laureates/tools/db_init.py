@@ -1,18 +1,18 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, TEXT
 
 
 def create_indexes(db):
     try:
-        col = db["laureates"]
+        col = db["places"]
 
-        col.create_index([
-            ("name",          "text"),
-            ("birth_country", "text"),
-            ("category",      "text"),
-            ("motivation",    "text"),
-        ])
+        col.create_index(
+            [("name", TEXT), ("feature_code", TEXT), ("timezone", TEXT)],
+            weights={"name": 10, "feature_code": 3, "timezone": 1},
+            name="name_text",
+        )
 
-        for field in ("name", "birth_country", "year", "category", "gender", "share"):
+        for field in ("name", "country_code", "feature_code",
+                      "population", "timezone", "admin1_code"):
             col.create_index(field)
 
         print("Indexes created.")
@@ -29,7 +29,7 @@ def main():
     parser.add_argument("--uri", default="mongodb://localhost:27017/")
     args = parser.parse_args()
     client = MongoClient(args.uri)
-    create_indexes(client['nobel_demo'])
+    create_indexes(client['geonames_demo'])
 
 
 if __name__ == "__main__":

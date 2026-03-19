@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Nobel Prize Laureates</title>
+    <title>GeoNames Places</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,8 +17,9 @@
     <header class="site-header py-4 mb-5">
         <div class="container">
             <div class="d-flex justify-content-between align-items-baseline">
-                <h1 class="fs-4 mb-0" style="color:#c8d1dc">
-                    <i class="bi bi-trophy me-2" style="color:var(--accent)"></i>Nobel Prize Laureates
+                <h1 class="fs-4 mb-0" style="color:var(--text-muted)">
+                    <i class="bi bi-globe2 me-2" style="color:var(--accent)"></i>GeoNames Places
+                    <small class="ms-2 text-secondary" style="font-size:0.7rem">13M+ records</small>
                 </h1>
                 <span class="text-secondary" style="font-size:0.75rem">
                     powered by
@@ -32,15 +33,15 @@
     <div class="container mb-5">
         <div class="card shadow">
             <div class="card-body p-4 p-lg-5">
-                <table id="laureates_table" class="table table-striped table-hover" style="width:100%">
+                <table id="places_table" class="table table-striped table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Year</th>
-                            <th>Category</th>
                             <th>Name</th>
-                            <th>Birth Country</th>
-                            <th>Share</th>
-                            <th>Motivation</th>
+                            <th>Country</th>
+                            <th>Feature</th>
+                            <th>Region</th>
+                            <th>Population</th>
+                            <th>Timezone</th>
                         </tr>
                     </thead>
                 </table>
@@ -49,7 +50,8 @@
     </div>
 
     <footer class="text-center text-secondary py-5" style="font-size:0.75rem">
-        Data sourced from the Nobel Prize API &middot;
+        Data sourced from <a href="https://www.geonames.org/" target="_blank" class="text-secondary">GeoNames</a>
+        (CC BY 4.0) &middot;
         Server-side processing by
         <a href="https://github.com/pjosols/mongo-datatables" target="_blank">mongo-datatables</a>
     </footer>

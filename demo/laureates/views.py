@@ -10,18 +10,20 @@ from mongo_datatables import DataTables, DataField
 
 
 DATA_FIELDS = [
-    DataField("name",          "string"),
-    DataField("birth_country", "string"),
-    DataField("year",          "number"),
-    DataField("category",      "string"),
-    DataField("motivation",    "string"),
-    DataField("share",         "number"),
+    DataField("name",         "string"),
+    DataField("country_code", "keyword"),
+    DataField("feature_code", "keyword"),
+    DataField("admin1_code",  "keyword"),
+    DataField("population",   "number"),
+    DataField("timezone",     "string"),
+    DataField("latitude",     "number"),
+    DataField("longitude",    "number"),
 ]
 
 
 def _get_db():
     client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
-    client.db = client['nobel_demo']
+    client.db = client['geonames_demo']
     return client
 
 
@@ -31,12 +33,12 @@ class IndexView(View):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class LaureatesDataView(View):
+class PlacesDataView(View):
     def post(self, request):
         data = {}
         try:
             data = json.loads(request.body)
-            result = DataTables(_get_db(), "laureates", data, data_fields=DATA_FIELDS).get_rows()
+            result = DataTables(_get_db(), "places", data, data_fields=DATA_FIELDS).get_rows()
             return JsonResponse(result)
         except Exception as e:
             import traceback
