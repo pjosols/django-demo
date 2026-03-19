@@ -116,11 +116,16 @@ def seed(connection_string="mongodb://localhost:27017/", do_download=False):
     total = 0
     batch = []
 
-    print("Inserting records ...")
+    print("Inserting records (population > 0 only) ...")
     with open(TXT_PATH, encoding="utf-8") as f:
         for line in f:
             parts = line.rstrip("\n").split("\t")
             if len(parts) < 19:
+                continue
+            try:
+                if int(parts[14]) <= 0:
+                    continue
+            except (ValueError, TypeError):
                 continue
             batch.append(parse_row(parts))
             if len(batch) >= BATCH:
