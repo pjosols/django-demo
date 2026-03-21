@@ -1,7 +1,9 @@
 # mongo-datatables Django Demo
 
+Live demo: [django-demo.net](https://django-demo.net)
+
 A Django app demonstrating server-side DataTables powered by
-[mongo-datatables](https://github.com/pjosols/mongo-datatables), using the
+[mongo-datatables](https://mongo-datatables.net), using the
 [GeoNames](https://www.geonames.org/) dataset (~13M geographic place names).
 
 ## Quickstart
@@ -45,10 +47,10 @@ Set `MONGO_URI` in the environment to point the app at a different instance.
 ```
 django-demo/
 ├── demo/
-│   ├── laureates/
-│   │   ├── static/laureates/js/table.js   # DataTables init + header→field mapping
-│   │   ├── templates/laureates/index.html # page template
-│   │   ├── tools/db_init.py               # index creation
+│   ├── places/
+│   │   ├── static/places/js/table.js      # DataTables init + header→field mapping
+│   │   ├── templates/places/index.html    # page template
+│   │   ├── tools/db_init.py               # index creation (used by seed script)
 │   │   ├── apps.py                        # app config
 │   │   ├── urls.py                        # routes
 │   │   └── views.py                       # views + API endpoint
@@ -97,17 +99,6 @@ const headerToKey = {
     'population': 'population',
     'timezone':   'timezone',
 };
-```
-
-## Search examples
-
-```
-name:york                    →  all places containing "york"
-country:GB                   →  exact match on country_code (indexed)
-feature:PPL                  →  populated places
-country:US feature:MT        →  mountains in the US
-population:>1000000          →  cities over 1 million
-timezone:America             →  all American timezones
 ```
 
 ## License

@@ -1,14 +1,15 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'demo-key'
-DEBUG = True
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "::1"]
+SECRET_KEY = os.environ.get('SECRET_KEY', 'demo-key')
+DEBUG = os.environ.get('DEBUG', 'false').lower() == 'true'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,::1').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
-    'laureates.apps.LaureatesConfig',
+    'places.apps.PlacesConfig',
 ]
 
 MIDDLEWARE = [
@@ -29,6 +30,7 @@ WSGI_APPLICATION = 'demo.wsgi.application'
 DATABASES = {}
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 USE_I18N = False
 USE_TZ = False

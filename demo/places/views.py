@@ -33,7 +33,7 @@ def _get_db():
 
 class IndexView(View):
     def get(self, request):
-        return render(request, 'laureates/index.html')
+        return render(request, 'places/index.html')
 
 
 @method_decorator(csrf_exempt, name='dispatch')

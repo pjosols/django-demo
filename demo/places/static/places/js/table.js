@@ -30,7 +30,26 @@ $(function () {
                 return JSON.stringify(d);
             }
         },
+        orderCellsTop: true,
         order: [[4, 'desc']],
+        initComplete: function () {
+            var api = this.api();
+            var row = $('<tr class="col-search-row">').appendTo('#places_table thead');
+            api.columns().every(function () {
+                var col = this;
+                var title = $(col.header(0)).text().trim();
+                var placeholders = {
+                    'Name': 'New York', 'Country': 'US', 'Feature': 'PPL',
+                    'Region': 'NY', 'Population': '>1000000', 'Timezone': 'America/New_York'
+                };
+                $('<th>').appendTo(row).append(
+                    $('<input type="text">').attr('placeholder', placeholders[title] || title)
+                        .on('input', function () {
+                            col.search(this.value).draw();
+                        })
+                );
+            });
+        },
         columns: [
             { data: 'name',          width: '180px' },
             { data: 'country_code',  width: '80px',  className: 'dt-center' },

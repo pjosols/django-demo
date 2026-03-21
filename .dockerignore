@@ -1,0 +1,13 @@
+.git
+.venv
+.kiro
+.claude
+__pycache__
+data
+*.py[cod]
+*.egg-info
+.DS_Store
+.env
+fly.toml
+README.md
+seed_geonames.py

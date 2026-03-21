@@ -1,12 +1,17 @@
 :root {
-    --accent: #40e0ff;
-    --accent-dim: rgba(64, 224, 255, 0.12);
+    /* Django brand – forest green derived from official #092e20, lightened for dark theme */
+    --accent: #44a047;
+    --accent-dim: rgba(68, 160, 71, 0.12);
+    --accent-hover: #66bb6a;          /* lighter green for hover */
+    --bg: #0b0d10;
     --surface: #151a21;
     --border: #273140;
+    --text: #e9eef5;
+    --text-muted: #c8d1dc;
 }
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background: #0b0d10;
+    background: var(--bg);
 }
 
 /* Header */
@@ -33,13 +38,13 @@ body {
     color: var(--accent);
     border-bottom-color: var(--border);
 }
-.table td { font-size: 0.8rem; color: #e9eef5; }
+.table td { font-size: 0.8rem; color: var(--text); }
 
 /* Pagination */
 .page-item.active .page-link {
     background: var(--accent);
     border-color: var(--accent);
-    color: #0b0d10;
+    color: var(--bg);
     font-weight: 600;
 }
 .page-link { color: rgba(255,255,255,0.5); }
@@ -58,6 +63,27 @@ body {
 /* DataTables info text */
 .dt-container .dt-info { font-size: 1rem; opacity: 0.5; }
 
+/* Column search row */
+.col-search-row th {
+    padding: 0.4rem 1rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+}
+.col-search-row input {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.75rem;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    width: 100%;
+}
+.col-search-row input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.15rem var(--accent-dim);
+}
+
 /* Footer */
 footer a { color: var(--accent); text-decoration: none; }
-footer a:hover { color: #7aeeff; }
+footer a:hover { color: var(--accent-hover); }

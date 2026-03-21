@@ -11,6 +11,15 @@ __pycache__/
 
 # Django
 *.log
+staticfiles/
+
+# Data
+data/
 
 # OS
 .DS_Store
+
+# IDE
+.idea/
+.claude/
+.kiro/

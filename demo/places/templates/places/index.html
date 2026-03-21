@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.2.2/datatables.min.css" rel="stylesheet">
-    <link href="{% static 'laureates/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'places/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
 
@@ -49,14 +49,32 @@
     </div>
 
     <footer class="text-center text-secondary py-5" style="font-size:0.75rem">
-        Data sourced from <a href="https://www.geonames.org/" target="_blank" class="text-secondary">GeoNames</a>
-        (CC BY 4.0) &middot;
-        Server-side processing by
-        <a href="https://github.com/pjosols/mongo-datatables" target="_blank">mongo-datatables</a>
+        <div class="mb-2">
+            <a href="https://mongo-datatables.com" target="_blank">mongo-datatables.com</a>
+            &middot;
+            <a href="https://github.com/pjosols/mongo-datatables" target="_blank">GitHub</a>
+            &middot;
+            <a href="https://mongo-datatables.readthedocs.io/" target="_blank">Docs</a>
+            &middot;
+            <a href="https://pypi.org/project/mongo-datatables/" target="_blank">PyPI</a>
+        </div>
+        <div class="mb-2">
+            Also available in:
+            <a href="https://github.com/pjosols/fastapi-demo" target="_blank">FastAPI</a>
+            &middot;
+            <a href="https://github.com/pjosols/flask-demo" target="_blank">Flask</a>
+            &middot;
+            <a href="https://github.com/pjosols/django-demo" target="_blank">Django</a>
+        </div>
+        <div>
+            Data: <a href="https://www.geonames.org/" target="_blank">GeoNames</a> (CC BY 4.0)
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.2.2/datatables.min.js"></script>
-    <script src="{% static 'laureates/js/table.js' %}"></script>
+    <script src="{% static 'places/js/table.js' %}"></script>
+    <script data-goatcounter="https://mongo-datatables.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
