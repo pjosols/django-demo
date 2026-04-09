@@ -1,4 +1,4 @@
-Django==5.0.3
+Django==5.1.14
 gunicorn==23.0.0
 mongo-datatables==2.1.0
 pymongo[srv]==4.11.2
